@@ -1,3 +1,10 @@
+var correct = 0;
+var incorrect = 0;
+var unanswered = 0;
+var questionContent
+var answers
+var results
+
 var questions = [
 	["Which is the oldest operating airline in the world?", "Delta", "Aeroflot", "Avianca", "KLM", "D"],
 	["Which iconic aircraft was grounded for over a month in 1979 after a series of high-profile accidents?", "McDonnell Douglas DC-10", "Boeing 747", "Lockheed L-1011 TriStar", "Airbus 340"]
