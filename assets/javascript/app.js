@@ -3,17 +3,18 @@ $(document).ready(function() {
 var correct = 0;
 var incorrect = 0;
 var unanswered = 0;
-var selectedAnswers;
+var selectedAnswer;
 var results;
 var questionNumber = 0;
 var triviaOutput;
+var questionTimer = 30;
+var countDown;
 
 //array holding the trivia questions
 var questionContent = [
-	"Which is the oldest operating airline in the world?",
+	"Which is the oldest operating airline in the world?", 
 	"Which iconic aircraft was grounded for over a month in 1979 after a series of high-profile accidents?"
 	];
-console.log(questionContent[0]);
 
 //array holding the options to answer	
 var answerOptions = [
@@ -28,22 +29,111 @@ var correctAnswers = ["KLM", "McDonnell Douglas DC-10"];
 var images = ["<img src='assets/images/giphy-klm.gif'>", "<img src='assets/images/aa-flight-191.jpg'>"];
 
 
-//function to show the start screen and hide the answer buttons//
-function startGame() {
-	$("#trivia-content").show();
+//function to start the game//
+$("body").on("click", "#start-game", function(event){
+	showTriviaGame();
+	gameTimer();
+});
+
+//onclick event to choose answer
+$("body").on("click", ".answer", function(event){
+	selectedAnswer = $(this).text();
+	
+	//if player chooses right answer
+	if(selectedAnswer === correctAnswers[questionNumber]) {
+		
+
+		//timer stops
+		clearInterval(countDown);
+		addCorrectAnswer();
+	}
+	else {
+		//if wrong answer is chosen
+		clearInterval(countDown);
+		addWrongAnswer();
+	}
+}); 
+
+//on click event for resetting game
+$("body").on("click", ".reset-button", function(event){
+	resetGame();
+}); 
+
+//}); I don't want to delete this yet - bug issue.
+
+//handles when game times out; adds to wrong questions.
+function wrongAnswerTimeOut() {
+	unanswered++;
+	triviaOutput = "<p>Time Remaining: <span class='timer'>" + questionTimer + "</span></p>" + "<p>Time's up!  The correct answer is: " + correctAnswers[questionNumber] + "</p>" + images[questionNumber];
+	$("#question-answers").html(triviaOutput);
+	setTimeout(nextQuestion, 5000);  
+}
+//handles when answer is correct; adds to correct questions.
+function addCorrectAnswer() {
+	correct++;
+	triviaOutput = "<p>Time Remaining: <span class='timer'>" + questionTimer + "</span></p>" + "<p>Congratulations -- you are correct!The correct answer is: "+ correctAnswers[questionNumber] + "</p>" + images[questionNumber];
+	$("#question-answers").html(triviaOutput);
+	setTimeout(nextQuestion, 5000);  
 }
 
-startGame();
+//handles when answer is wrong; adds to wrong question tally.
+function addWrongAnswer() {
+	incorrect++;
+	triviaOutput = "<p>Time Remaining: <span class='timer'>" + questionTimer + "</span></p>" + "<p>Not quite! The correct answer is: "+ correctAnswers[questionNumber] + "</p>" + images[questionNumber];
+	$("#question-answers").html(triviaOutput);
+	setTimeout(nextQuestion, 5000);
+}
 
-
-
+//function to generate question and answer content
 function showTriviaGame() {
-	triviaOutput = "<p>Time Remaining: 30</p><p>" + questionContent[questionNumber] + "<button>A. " + answerOptions[questionNumber][0] + "</button><button>B. "+answerOptions[questionNumber][1]+"</button><button>C. "+answerOptions[questionNumber][2]+"</button><button>D. "+answerOptions[questionNumber][3]+"</button>";
+	triviaOutput = "<p>Time Remaining: <span class='timer'>30</span></p><p>" + questionContent[questionNumber] + "<button class='answer'>A. " + answerOptions[questionNumber][0] + "</button><button class='answer'>B. "+answerOptions[questionNumber][1]+"</button><button class='answer'>C. "+answerOptions[questionNumber][2]+"</button><button class='answer'>D. "+answerOptions[questionNumber][3]+"</button>";
 	$("#question-answers").html(triviaOutput);
 }
 
-showTriviaGame();
+//moves to next question when question is answered or times out
+function nextQuestion() {
+	if (questionNumber < 1) {
+	questionNumber++;
+	showTriviaGame();
+	questionTimer = 30;
+	gameTimer();
+	}
+	else {
+		resultsScreen();
+	}
+}
 
+//handles the time for the game
+function gameTimer() {
+	countDown = setInterval(clockIsTicking, 1000);
+	function clockIsTicking() {
+		if (questionTimer === 0) {
+			clearInterval(countDown);
+			wrongAnswerTimeOut();
+		}
+		if (questionTimer > 0) {
+			questionTimer--;
+		}
+		$(".timer").html(questionTimer);
+	}
+}
+
+//shows results screen
+function resultsScreen() {
+	triviaOutput = "<p>Time Remaining: <span class='timer'>" + questionTimer + "</span></p>" + "<p>Here's your score!" + "</p>" + "<p>Correct Answers: " + correct + "</p>" + "<p>Wrong Answers: " + incorrect + "</p>" + "<p>Unanswered: " + unanswered + "</p>" + "<p><button class='reset-button'>Try again!</button></p>";
+	$("#results").html(triviaOutput);
+}
+
+//resets game
+function resetGame() {
+	questionNumber = 0;
+	correct = 0;
+	incorrect = 0;
+	unanswered = 0;
+	questionTimer = 30;
+	showTriviaGame();
+	gameTimer();
+}
 
 });
 
