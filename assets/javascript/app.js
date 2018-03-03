@@ -1,14 +1,19 @@
+$(document).ready(function() {
+
 var correct = 0;
 var incorrect = 0;
 var unanswered = 0;
-//var selectedAnswers
-//var results
+var selectedAnswers;
+var results;
+var questionNumber = 0;
+var triviaOutput;
 
 //array holding the trivia questions
 var questionContent = [
-	["Which is the oldest operating airline in the world?"],
-	["Which iconic aircraft was grounded for over a month in 1979 after a series of high-profile accidents?"]
+	"Which is the oldest operating airline in the world?",
+	"Which iconic aircraft was grounded for over a month in 1979 after a series of high-profile accidents?"
 	];
+console.log(questionContent[0]);
 
 //array holding the options to answer	
 var answerOptions = [
@@ -23,12 +28,34 @@ var correctAnswers = ["KLM", "McDonnell Douglas DC-10"];
 var images = ["<img src='assets/images/giphy-klm.gif'>", "<img src='assets/images/aa-flight-191.jpg'>"];
 
 
+//function to show the start screen and hide the answer buttons//
+function startGame() {
+	$("#trivia-content").show();
+}
+
+startGame();
+
+
+
+function showTriviaGame() {
+	triviaOutput = "<p>Time Remaining: 30</p><p>" + questionContent[questionNumber] + "<button>A. " + answerOptions[questionNumber][0] + "</button><button>B. "+answerOptions[questionNumber][1]+"</button><button>C. "+answerOptions[questionNumber][2]+"</button><button>D. "+answerOptions[questionNumber][3]+"</button>";
+	$("#question-answers").html(triviaOutput);
+}
+
+showTriviaGame();
+
+
+});
+
+
+
+
 //Pseudocode
 //Show title screen with a start button
 //Click start button to begin game
 //Show first question
 //Set timer for 30 seconds
-//Player can choose only 1 answer the question 
+//Player can choose only 1 answer to the question 
 //Show question until
 	//Player answers or
 	//Time runs out

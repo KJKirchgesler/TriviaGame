@@ -1,0 +1,22 @@
+.container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  clear: both;
+}
+
+h1 {
+	text-align: center;
+}
+
+button {
+    width: 200px;
+    height: 50px;
+    display: block;
+    align: center;
+}
+
+.answer-option {
+    display: block;
+    width: 500px;
+}
