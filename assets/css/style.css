@@ -16,6 +16,10 @@ button {
     align: center;
 }
 
+#redo {
+   display: none;
+}
+
 .answer-option {
     display: block;
     width: 500px;

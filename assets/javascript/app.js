@@ -31,6 +31,7 @@ var images = ["<img src='assets/images/giphy-klm.gif'>", "<img src='assets/image
 
 //function to start the game//
 $("body").on("click", "#start-game", function(event){
+	$("#start-game").hide();
 	showTriviaGame();
 	gameTimer();
 });
@@ -55,39 +56,41 @@ $("body").on("click", ".answer", function(event){
 }); 
 
 //on click event for resetting game
-$("body").on("click", ".reset-button", function(event){
+$("body").on("click", "#redo", function(event){
 	resetGame();
 }); 
 
-//}); I don't want to delete this yet - bug issue.
 
 //handles when game times out; adds to wrong questions.
 function wrongAnswerTimeOut() {
 	unanswered++;
 	triviaOutput = "<p>Time Remaining: <span class='timer'>" + questionTimer + "</span></p>" + "<p>Time's up!  The correct answer is: " + correctAnswers[questionNumber] + "</p>" + images[questionNumber];
 	$("#question-answers").html(triviaOutput);
-	setTimeout(nextQuestion, 5000);  
+	setTimeout(nextQuestion, 3000);  
 }
+
 //handles when answer is correct; adds to correct questions.
 function addCorrectAnswer() {
 	correct++;
-	triviaOutput = "<p>Time Remaining: <span class='timer'>" + questionTimer + "</span></p>" + "<p>Congratulations -- you are correct!The correct answer is: "+ correctAnswers[questionNumber] + "</p>" + images[questionNumber];
+	triviaOutput = "<p>Time Remaining: <span class='timer'>" + questionTimer + "</span></p>" + "<p>Congratulations -- you are correct!The correct answer is: " + correctAnswers[questionNumber] + "</p>" + images[questionNumber];
 	$("#question-answers").html(triviaOutput);
-	setTimeout(nextQuestion, 5000);  
+	setTimeout(nextQuestion, 3000);  
 }
 
 //handles when answer is wrong; adds to wrong question tally.
 function addWrongAnswer() {
 	incorrect++;
-	triviaOutput = "<p>Time Remaining: <span class='timer'>" + questionTimer + "</span></p>" + "<p>Not quite! The correct answer is: "+ correctAnswers[questionNumber] + "</p>" + images[questionNumber];
+	triviaOutput = "<p>Time Remaining: <span class='timer'>" + questionTimer + "</span></p>" + "<p>Not quite! The correct answer is: " + correctAnswers[questionNumber] + "</p>" + images[questionNumber];
 	$("#question-answers").html(triviaOutput);
-	setTimeout(nextQuestion, 5000);
+	setTimeout(nextQuestion, 3000);
 }
 
 //function to generate question and answer content
 function showTriviaGame() {
-	triviaOutput = "<p>Time Remaining: <span class='timer'>30</span></p><p>" + questionContent[questionNumber] + "<button class='answer'>A. " + answerOptions[questionNumber][0] + "</button><button class='answer'>B. "+answerOptions[questionNumber][1]+"</button><button class='answer'>C. "+answerOptions[questionNumber][2]+"</button><button class='answer'>D. "+answerOptions[questionNumber][3]+"</button>";
+	triviaOutput = "<p>Time Remaining: <span class='timer'>30</span></p><p>" + questionContent[questionNumber] + "<button class='first-answer answer'>A. " + answerOptions[questionNumber][0] + "</button><button class='answer'>B. " + answerOptions[questionNumber][1] + "</button><button class='answer'>C. " + answerOptions[questionNumber][2] + "</button><button class='answer'>D. " + answerOptions[questionNumber][3] + "</button>";
 	$("#question-answers").html(triviaOutput);
+	//hides Play again button
+	document.getElementById("redo").style.display = "none";
 }
 
 //moves to next question when question is answered or times out
@@ -100,6 +103,7 @@ function nextQuestion() {
 	}
 	else {
 		resultsScreen();
+		$("#results").show();
 	}
 }
 
@@ -120,12 +124,15 @@ function gameTimer() {
 
 //shows results screen
 function resultsScreen() {
-	triviaOutput = "<p>Time Remaining: <span class='timer'>" + questionTimer + "</span></p>" + "<p>Here's your score!" + "</p>" + "<p>Correct Answers: " + correct + "</p>" + "<p>Wrong Answers: " + incorrect + "</p>" + "<p>Unanswered: " + unanswered + "</p>" + "<p><button class='reset-button'>Try again!</button></p>";
+	triviaOutput = "<p>Here's your score!" + "</p>" + "<p>Correct Answers: " + correct + "</p>" + "<p>Wrong Answers: " + incorrect + "</p>" + "<p>Unanswered: " + unanswered + "</p>";
 	$("#results").html(triviaOutput);
+	//reveals Play Again button which is hidden by CSS when game first starts
+	document.getElementById("redo").style.display = "inline";
 }
 
 //resets game
 function resetGame() {
+	$("#results").hide();
 	questionNumber = 0;
 	correct = 0;
 	incorrect = 0;
