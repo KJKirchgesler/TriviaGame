@@ -13,20 +13,30 @@ var countDown;
 //array holding the trivia questions
 var questionContent = [
 	"Which is the oldest operating airline in the world?", 
-	"Which iconic jet was grounded for over a month in 1979 after a series of high-profile accidents?"
+	"Which iconic jet was grounded for over a month in 1979 after a series of high-profile accidents?",
+	"The whimsically named Wizz Air is a low-cost carrier from which country?",
+	"Which airline, known for its slogan 'Come fly the friendly skies', forcibly removed a passenger from a flight with its regional carrier when he refused to give up his seat to airline staff needing to cover a flight at another location in 2017?",
+	"Which animal was displayed on the tail of South African Airways aircraft during the apartheid era?",
+	"Which celebrity and aviation enthusiast once owned a Quantas Boeing 707 jet and lives on a property containing a runway that can accommodate it?",
+	"Which is the longest flight in the world by distance?"
 	];
 
 //array holding the options to answer	
 var answerOptions = [
 	["Delta", "Aeroflot", "Avianca", "KLM"],
-	["McDonnell Douglas DC-10", "Boeing 747", "Lockheed L-1011 TriStar", "Airbus 340"]
+	["McDonnell Douglas DC-10", "Boeing 747", "Lockheed L-1011 TriStar", "Airbus 340"],
+	["Hungary", "Colombia", "Indonesia", "South Africa"],
+	["American", "Southwest", "United", "Delta"],
+	["Elephant", "Lion", "Springbok", "Giraffe"],
+	["Tom Cruise", "Gisele Bundchen", "John Travolta", "Angelina Jolie"],
+	["Auckland to Doha (Qatar Airways)", "Johannesburg to Atlanta (Delta)", "Los Angeles to Singapore (United)", "Dallas/Ft Worth to Sydney (Qantas)"]
 	];
 
 //array holding the correct answers
-var correctAnswers = ["KLM", "McDonnell Douglas DC-10"];
+var correctAnswers = ["KLM", "McDonnell Douglas DC-10", "Hungary", "United", "Springbok", "John Travolta", "Auckland to Doha (Qatar Airways)"];
 
 //array holding the images for each answer
-var images = ["<img src='assets/images/giphy-klm.gif'>", "<img src='assets/images/aa-flight-191.jpg'>"];
+var images = ["<img src='assets/images/giphy-klm.gif'>", "<img src='assets/images/aa-flight-191.jpg'>", "<img src='assets/images/giphy-wizz.gif'>", "<img src='assets/images/giphy-united.gif'>", "<img src='assets/images/giphy-springbok.gif'>", "<img src='assets/images/john-travolta-pilot.jpg'>", "<img src='assets/images/longest-flight.jpg'>"];
 
 
 //function to start the game//
@@ -95,7 +105,7 @@ function showTriviaGame() {
 
 //moves to next question when question is answered or times out
 function nextQuestion() {
-	if (questionNumber < 1) {
+	if (questionNumber < 6) {
 	questionNumber++;
 	showTriviaGame();
 	questionTimer = 30;
