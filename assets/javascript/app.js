@@ -13,7 +13,7 @@ var countDown;
 //array holding the trivia questions
 var questionContent = [
 	"Which is the oldest operating airline in the world?", 
-	"Which iconic aircraft was grounded for over a month in 1979 after a series of high-profile accidents?"
+	"Which iconic jet was grounded for over a month in 1979 after a series of high-profile accidents?"
 	];
 
 //array holding the options to answer	
@@ -72,7 +72,7 @@ function wrongAnswerTimeOut() {
 //handles when answer is correct; adds to correct questions.
 function addCorrectAnswer() {
 	correct++;
-	triviaOutput = "<p>Time Remaining: <span class='timer'>" + questionTimer + "</span></p>" + "<p>Congratulations -- you are correct!The correct answer is: " + correctAnswers[questionNumber] + "</p>" + images[questionNumber];
+	triviaOutput = "<p>Time Remaining: <span class='timer'>" + questionTimer + "</span></p>" + "<p>Congratulations -- you are correct! The answer is: " + correctAnswers[questionNumber] + "</p>" + images[questionNumber];
 	$("#question-answers").html(triviaOutput);
 	setTimeout(nextQuestion, 3000);  
 }
@@ -87,7 +87,7 @@ function addWrongAnswer() {
 
 //function to generate question and answer content
 function showTriviaGame() {
-	triviaOutput = "<p>Time Remaining: <span class='timer'>30</span></p><p>" + questionContent[questionNumber] + "<button class='first-answer answer'>A. " + answerOptions[questionNumber][0] + "</button><button class='answer'>B. " + answerOptions[questionNumber][1] + "</button><button class='answer'>C. " + answerOptions[questionNumber][2] + "</button><button class='answer'>D. " + answerOptions[questionNumber][3] + "</button>";
+	triviaOutput = "<p>Time Remaining: <span class='timer'>30</span></p><p>" + questionContent[questionNumber] + "<button class='answer'>" + answerOptions[questionNumber][0] + "</button><button class='answer'>" + answerOptions[questionNumber][1] + "</button><button class='answer'>" + answerOptions[questionNumber][2] + "</button><button class='answer'>" + answerOptions[questionNumber][3] + "</button>";
 	$("#question-answers").html(triviaOutput);
 	//hides Play again button
 	document.getElementById("redo").style.display = "none";
