@@ -36,7 +36,7 @@ var answerOptions = [
 var correctAnswers = ["KLM", "McDonnell Douglas DC-10", "Hungary", "United", "Springbok", "John Travolta", "Auckland to Doha (Qatar Airways)"];
 
 //array holding the images for each answer
-var images = ["<img src='assets/images/giphy-klm.gif'>", "<img src='assets/images/aa-flight-191.jpg'>", "<img src='assets/images/giphy-wizz.gif'>", "<img src='assets/images/giphy-united.gif'>", "<img src='assets/images/giphy-springbok.gif'>", "<img src='assets/images/john-travolta-pilot.jpg'>", "<img src='assets/images/longest-flight.jpg'>"];
+var images = ["<img src='assets/images/giphy-KLM.gif'>", "<img src='assets/images/aa-flight-191.jpg'>", "<img src='assets/images/giphy-wizz.gif'>", "<img src='assets/images/giphy-united.gif'>", "<img src='assets/images/giphy-springbok.gif'>", "<img src='assets/images/john-travolta-pilot.jpg'>", "<img src='assets/images/longest-flight.jpg'>"];
 
 
 //function to start the game//
